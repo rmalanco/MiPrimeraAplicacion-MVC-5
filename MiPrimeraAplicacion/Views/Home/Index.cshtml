@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<a href="@Url.Action("Hello", "Home", new { name = "World" })">Hello, World!</a> 
+...
+<a href="@Url.Action("CurrentTime", "Home")">Current Time</a>
+...
+<a href="@Url.Action("CurrentTime2", "Home")">Current Time 2</a>
+
+<br />
+<hr />
+<h4>
+    Ejemplo de razor con un ciclo for
+</h4>
+<ul>
+    @for (int i = 0; i < 10; i++)
+    {
+        <li>@i</li>
+    }
+</ul>
+
+
