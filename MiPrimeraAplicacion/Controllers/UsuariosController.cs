@@ -119,36 +119,3 @@ namespace MiPrimeraAplicacion.Controllers
     }
 }
 
-// Que es un Modelo:
-// Un modelo en MVC es la representación de los datos con los que el sistema opera. 
-// El modelo es la parte de la aplicación que gestiona la lógica de negocio, 
-// la lógica de acceso a los datos y las estructuras de datos que se utilizan. 
-// En resumen, el modelo es el componente de la aplicación que gestiona los datos y las reglas de negocio.
-
-// ¿Qué es un HtmlHelper?
-// Los HtmlHelpers son métodos que generan código HTML.
-
-// Que es el Model Binding:
-// El model binding es el proceso de asignar valores de las peticiones HTTP a los parámetros de los métodos de acción de un controlador.
-// ejemplo:
-// public ActionResult Edit(int id, FormCollection collection)
-// {
-//     var usuario = listUsuarios.Single(u => u.Id == id);
-//     if (TryUpdateModel(usuario))
-//     {
-//         return RedirectToAction("Index");
-//     }
-//     return View(usuario);
-// }
-// como podemos ver el id es un parametro que se le pasa a la accion y el FormCollection es un parametro que se le pasa a la accion
-
-//[NonAction]
-//public List<Usuario> ObtenerUsuarios()
-//{
-//    return new List<Usuario>
-//    {
-//        new Usuario { Id = 1, UserName = "admin", Password = "admin" },
-//        new Usuario { Id = 2, UserName = "user", Password = "user" }
-//    };
-//}
-
