@@ -115,6 +115,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202402250150311_InitialCreate.cs" />
+    <Compile Include="Migrations\202402250150311_InitialCreate.designer.cs">
+      <DependentUpon>202402250150311_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202402250208418_init-database.cs" />
+    <Compile Include="Migrations\202402250208418_init-database.designer.cs">
+      <DependentUpon>202402250208418_init-database.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -130,11 +139,11 @@
     <Content Include="Views\Proveedores\Index.cshtml" />
     <Content Include="Views\Home\CurrentTime.cshtml" />
     <Content Include="Views\Home\CurrentTime2.cshtml" />
+    <Content Include="Views\Usuarios\Create.cshtml" />
     <Content Include="Views\Usuarios\Index.cshtml" />
     <Content Include="Views\Usuarios\Details.cshtml" />
-    <Content Include="Views\Usuarios\Create.cshtml" />
-    <Content Include="Views\Usuarios\Delete.cshtml" />
     <Content Include="Views\Usuarios\Edit.cshtml" />
+    <Content Include="Views\Usuarios\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -146,6 +155,14 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\Image\" />
     <Folder Include="Scripts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202402250150311_InitialCreate.resx">
+      <DependentUpon>202402250150311_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202402250208418_init-database.resx">
+      <DependentUpon>202402250208418_init-database.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

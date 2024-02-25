@@ -2,6 +2,7 @@
 using MiPrimeraAplicacion.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Web;
@@ -11,7 +12,7 @@ namespace MiPrimeraAplicacion.Controllers
 {
     public class UsuariosController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Usuarios
         public ActionResult Index()
@@ -34,42 +35,14 @@ namespace MiPrimeraAplicacion.Controllers
         {
             return View();
         }
-        
+
 
         // POST: Usuarios/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Usuario usuario)
         {
             try
             {
-                //var usuario = new Usuario();
-
-                //if (listUsuarios.Count > 0)
-                //{
-                //    usuario.Id = listUsuarios.Max(u => u.Id) + 1;
-                //}
-                //else
-                //{
-                //    usuario.Id = 1;
-                //}
-
-                //if (TryUpdateModel(usuario))
-                //{
-                //    listUsuarios.Add(usuario);
-                //    return RedirectToAction("Index");
-                //}
-
-                //return View(usuario);
-
-                // utilizamos el model binding con el FormCollection collection
-                var usuario = new Usuario();
-
-                if (collection != null)
-                {
-                    usuario.UserName = collection["UserName"];
-                    usuario.Password = collection["Password"];
-                }
-
                 if (ModelState.IsValid)
                 {
                     db.Usuarios.Add(usuario);
@@ -88,36 +61,21 @@ namespace MiPrimeraAplicacion.Controllers
         // GET: Usuarios/Edit/5
         public ActionResult Edit(int id)
         {
-           return DetailsUser(id);
+            return DetailsUser(id);
         }
 
         // POST: Usuarios/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Usuario usuario)
         {
             try
             {
-                //var usuario = listUsuarios.Single(u => u.Id == id);
-                //if (TryUpdateModel(usuario))
-                //{
-                //    return RedirectToAction("Index");
-                //}
-                //return View(usuario);
-
-                // utilizamos el model binding con el FormCollection collection
-                var usuario = db.Usuarios.Single(u => u.Id == id);
-                if (collection != null)
-                {
-                    usuario.UserName = collection["UserName"];
-                    usuario.Password = collection["Password"];
-                }
-
                 if (ModelState.IsValid)
                 {
+                    db.Entry(usuario).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-
                 return View(usuario);
             }
             catch
@@ -135,12 +93,12 @@ namespace MiPrimeraAplicacion.Controllers
 
         // POST: Usuarios/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(Usuario usuario)
         {
             try
             {
-                var usuario = db.Usuarios.Single(u => u.Id == id);
-                db.Usuarios.Remove(usuario);
+                var usuarioEliminar = db.Usuarios.Single(u => u.Id == usuario.Id);
+                db.Usuarios.Remove(usuarioEliminar);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -155,17 +113,9 @@ namespace MiPrimeraAplicacion.Controllers
             var usuario = db.Usuarios.Single(u => u.Id == id);
             return View(usuario);
         }
-        
 
-        //[NonAction]
-        //public List<Usuario> ObtenerUsuarios()
-        //{
-        //    return new List<Usuario>
-        //    {
-        //        new Usuario { Id = 1, UserName = "admin", Password = "admin" },
-        //        new Usuario { Id = 2, UserName = "user", Password = "user" }
-        //    };
-        //}
+
+        
     }
 }
 
@@ -191,4 +141,14 @@ namespace MiPrimeraAplicacion.Controllers
 //     return View(usuario);
 // }
 // como podemos ver el id es un parametro que se le pasa a la accion y el FormCollection es un parametro que se le pasa a la accion
+
+//[NonAction]
+//public List<Usuario> ObtenerUsuarios()
+//{
+//    return new List<Usuario>
+//    {
+//        new Usuario { Id = 1, UserName = "admin", Password = "admin" },
+//        new Usuario { Id = 2, UserName = "user", Password = "user" }
+//    };
+//}
 
