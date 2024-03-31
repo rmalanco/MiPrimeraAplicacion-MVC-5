@@ -13,5 +13,10 @@ namespace MiPrimeraAplicacion.Data
         {
         }
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<LicenciaConducir> LicenciasConducir { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Matricula> Matriculas { get; set; }
+        public DbSet<Curso> Cursos { get; set; }
+        public DbSet<Alumno> Alumnos { get; set; }
     }
 }

@@ -101,13 +101,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\CTTDB2.accdb" />
     <Content Include="Content\CSS\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AlumnoController.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
+    <Compile Include="Controllers\CursosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
@@ -123,10 +126,28 @@
     <Compile Include="Migrations\202402250208418_init-database.designer.cs">
       <DependentUpon>202402250208418_init-database.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202403100619461_NewTables.cs" />
+    <Compile Include="Migrations\202403100619461_NewTables.designer.cs">
+      <DependentUpon>202403100619461_NewTables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Alumno.cs" />
     <Compile Include="Models\Cliente.cs" />
+    <Compile Include="Models\Curso.cs" />
+    <Compile Include="Models\LicenciaConducir.cs" />
+    <Compile Include="Models\Matricula.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reportes\Datatest.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Datatest.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WebTestDBDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WebTestDBDataSet.xsd</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -144,17 +165,39 @@
     <Content Include="Views\Usuarios\Details.cshtml" />
     <Content Include="Views\Usuarios\Edit.cshtml" />
     <Content Include="Views\Usuarios\Delete.cshtml" />
+    <Content Include="Reportes\Datatest.xsc">
+      <DependentUpon>Datatest.xsd</DependentUpon>
+    </Content>
+    <None Include="Reportes\Datatest.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Datatest.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reportes\Datatest.xss">
+      <DependentUpon>Datatest.xsd</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="Reportes\WebTestDBDataSet.xsc">
+      <DependentUpon>WebTestDBDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="Reportes\WebTestDBDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>WebTestDBDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Reportes\WebTestDBDataSet.xss">
+      <DependentUpon>WebTestDBDataSet.xsd</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Content\Image\" />
     <Folder Include="Scripts\" />
+    <Folder Include="Views\Alumno\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202402250150311_InitialCreate.resx">
@@ -163,6 +206,11 @@
     <EmbeddedResource Include="Migrations\202402250208418_init-database.resx">
       <DependentUpon>202402250208418_init-database.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403100619461_NewTables.resx">
+      <DependentUpon>202403100619461_NewTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Report1.rdlc" />
+    <EmbeddedResource Include="Reportes\Report2.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

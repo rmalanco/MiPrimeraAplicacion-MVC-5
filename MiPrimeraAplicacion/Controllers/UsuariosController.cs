@@ -15,6 +15,9 @@ namespace MiPrimeraAplicacion.Controllers
         private readonly ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Usuarios
+        //[OutputCache(Duration = 60)]
+        [OutputCache(CacheProfile = "Cache1Minute")]
+        // OutputCache es un atributo que permite almacenar en caché el resultado de un método de acción durante un tiempo determinado, esto puede mejorar el rendimiento de la aplicación.
         public ActionResult Index()
         {
             var usuarios = from u in db.Usuarios
@@ -25,6 +28,7 @@ namespace MiPrimeraAplicacion.Controllers
         }
 
         // GET: Usuarios/Details/5
+        [OutputCache(Duration = int.MaxValue, VaryByParam = "id")]
         public ActionResult Details(int id)
         {
             return DetailsUser(id);
@@ -47,6 +51,7 @@ namespace MiPrimeraAplicacion.Controllers
                 {
                     db.Usuarios.Add(usuario);
                     db.SaveChanges();
+                    LimpiarCache();
                     return RedirectToAction("Index");
                 }
 
@@ -74,6 +79,7 @@ namespace MiPrimeraAplicacion.Controllers
                 {
                     db.Entry(usuario).State = EntityState.Modified;
                     db.SaveChanges();
+                    LimpiarCache();
                     return RedirectToAction("Index");
                 }
                 return View(usuario);
@@ -84,7 +90,6 @@ namespace MiPrimeraAplicacion.Controllers
             }
         }
 
-        // GET: Usuarios/Delete/5
         // GET: Usuarios/Delete/5
         public ActionResult Delete(int id)
         {
@@ -100,6 +105,7 @@ namespace MiPrimeraAplicacion.Controllers
                 var usuarioEliminar = db.Usuarios.Single(u => u.Id == usuario.Id);
                 db.Usuarios.Remove(usuarioEliminar);
                 db.SaveChanges();
+                LimpiarCache();
                 return RedirectToAction("Index");
             }
             catch
@@ -110,12 +116,15 @@ namespace MiPrimeraAplicacion.Controllers
 
         private ActionResult DetailsUser(int id)
         {
-            var usuario = db.Usuarios.Single(u => u.Id == id);
+            var usuario = db.Usuarios.SingleOrDefault(u => u.Id == id);
             return View(usuario);
         }
-
-
         
+        // Metodo de limpieza de cache
+        private void LimpiarCache()
+        {
+            Response.RemoveOutputCacheItem(Url.Action("Index"));
+        }
     }
 }
 
